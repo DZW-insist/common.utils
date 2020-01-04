@@ -113,6 +113,24 @@ public class DateUtil {
 	}
 	
 	
+	public static boolean inMonth(Date thiDate) {
+		
+		return false;
+	}
+	
+	public static boolean inMonth(String thisDate) {
+		Date parse;
+		try {
+			parse = sdfDate.parse(thisDate);
+			return inMonth(parse);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 	public static void main(String[] args){
 		System.out.println(inWeek("2020-1-9"));
 		
