@@ -114,7 +114,6 @@ public class DateUtil {
 	
 	
 	public static boolean inMonth(Date thiDate) {
-		Calendar instance = Calendar.getInstance();
 		return false;
 	}
 	
