@@ -1,177 +1,153 @@
 package com.dizewi.common.utils;
 
-import java.util.Random;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * @author 作者:dizewei
- * @version 创建时间：2020年1月3日 下午3:13:36 类功能说明
- */
+/** 
+* @author 作者:dizewei
+* @version 创建时间：2020年1月4日 上午8:39:05 
+* 类功能说明 
+*/
 public class FileUtil {
-
 	
 	/**
-	 * 
-	* @Title: isNull  
-	* @Description: 判断字符串为空，为空时返回true
-	* @param @param str
-	* @param @return    参数  
-	* @return boolean    返回类型  
-	* @throws
-	 */
-	public static boolean isNull(String str) {
-		if (str == null) {
-			return true;
-		}
-		//字符串去除空格
-		str=str.trim();
-		if(str.equals("")) {
-			return true;
-		}
-		return false;
-	}
-	/**
-	 * 
-	* @Title: isNotNull  
-	* @Description: 判断字符串不为空  
-	* @param @param str
-	* @param @return    参数  
-	* @return boolean    返回类型  
-	* @throws
-	 */
-	public static boolean isNotNull(String str) {
-		return !isNull(str);
-	}
-	
-	/**
-	 * 
-	* @Title: inPhone  
-	* @Description: 判断字符串为手机号  
-	* @param @param str
-	* @param @return    参数  
-	* @return boolean    返回类型  
-	* @throws
-	 */
-	public static boolean isPhone(String str) {
-		String regex="1[3578]\\d{9}";	
-		return str.matches(regex);
-	}
-	
-	/**
-	* @Title: isEmail  
-	* @Description: 判断字符串为邮箱
-	* @param @param str
-	* @param @return    参数  
-	* @return boolean    返回类型  
-	* @throws
-	 */
-	public static boolean isEmail(String str) {
-		String regex="\\w+@\\w+(.com|.cn|.com.cn|.net)";	
-		return str.matches(regex);
-	}
-	
-	/**
-	 * 
-	* @Title: isLetter  
-	* @Description:判断字符串为字母
-	* @param @param str
-	* @param @return    参数  
-	* @return boolean    返回类型  
-	* @throws
-	 */
-	public static boolean isLetter(String str) {
-		//字符串不可为空
-		if(isNull(str)) {
-			return false;
-		}
-		//将字符串中的字母转为小写字母
-		str=str.toLowerCase();
-		String regex="[a-z]+";
-		return str.matches(regex);
-	}
-	
-	/**
-	* @Title: getRandomChar  
-	* @Description: 获取随机的英文字母
-	* @param @return    参数  
-	* @return char    返回类型  
-	* @throws
-	 */
-	public static char getRandomLetterChar() {
-		Random random = new Random();
-		char c=(char) ('a'+random.nextInt(26));
-		return c;
-	}
-	
-	/**
-	* @Title: getRandomString  
-	* @Description: 获取随机的指定长度的英文字符串
-	* @param @param i
+	* @Title: getExtName  
+	* @Description: 获取文件的拓展名
+	* @param @param fileName
 	* @param @return    参数  
 	* @return String    返回类型  
 	* @throws
 	 */
-	public static String getRandomLetterString(int num) {
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < num; i++) {
-			sb.append(getRandomLetterChar());
+	public static String getExtName(String fileName) {
+		fileName=fileName.trim();
+		if(fileName==null ||fileName.equals("")) {
+			throw new RuntimeException("文件名不可为空");
 		}
-		return sb.toString();
-	}
-	
-	/**
-	* @Title: getRandomNumber  
-	* @Description: 获取随机数字
-	* @param @return    参数  
-	* @return String    返回类型  
-	* @throws
-	 */
-	public static char getRandomNumber() {
-		Random random = new Random();
-		char c=(char) ('0'+random.nextInt(10));
-		return c;
-	}
-	
-	/**
-	* @Title: getRandomNumberString  
-	* @Description:获取随机的指定长度的数字字符串
-	* @param @param num
-	* @param @return    参数  
-	* @return String    返回类型  
-	* @throws
-	 */
-	public static String getRandomNumberString(int num) {
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i <num; i++) {
-			sb.append(getRandomNumber());
+		if(fileName.lastIndexOf(".")<=-1) {
+			throw new RuntimeException(fileName+":该文件 没有包含拓展名");
 		}
-		return sb.toString();
+		String extName = fileName.substring(fileName.lastIndexOf("."));
+		
+		return extName;
+	}
+		
+	/**
+	* @Title: getTempDirectory  
+	* @Description: 获取操作系统的临时目录
+	* @param @return    参数  
+	* @return File    返回类型  
+	* @throws
+	 */
+	public static File getTempDirectory() {
+		String path = System.getProperty("java.io.tmpdir");
+		return new File(path);
+		
+	}
+	
+	/**
+	* @Title: getUserDirectory  
+	* @Description: 获取用户目录 
+	* @param @return    参数  
+	* @return File    返回类型  
+	* @throws
+	 */
+	public static File getUserDirectory() {
+		String path = System.getProperty("user.home");
+		return new File(path);
 	}
 	
 	
+	public static void deleFile(String fileName) {
+		deleteFile(new File(fileName));
+	}
 	/**
-	* @Title: getRandomNumAndChar  
-	* @Description: 获取随机的指定长度的数字字母字符串
-	* @param @param Num
-	* @param @return    参数  
-	* @return String    返回类型  
+	* @Title: deleteFile  
+	* @Description: 删除文件
+	* @param @param file    参数  
+	* @return void    返回类型  
 	* @throws
 	 */
-	public static String getRandomNumAndChar(int num) {
-		StringBuffer sb = new StringBuffer();
-		Random random = new Random();
-		for (int i = 0; i < num; i++) {
-			int j=random.nextInt(36);
-			//随机数字大于10生成字母
-			if (j>10) {
-			sb.append(getRandomLetterChar());
-			}else{
-				sb.append(getRandomNumber());
+	public static void deleteFile(File file) {
+		File[] listFile=file.listFiles();
+		for (File thisFile : listFile) {
+			//判断该文件是否是目录还是文件
+			if(thisFile.isDirectory()) {
+				//迭代调用方法进行删除
+				deleteFile(thisFile);
+				//删除文件夹
+				thisFile.delete();
+			}else {
+				//是文件的话删除文件
+				thisFile.delete();
 			}
 		}
-		return sb.toString();
 	}
-
-	public static void main(String[] args) {
-				System.out.println(getRandomNumAndChar(6));
-	}	
+	
+	/**
+	* @Title: readFile  
+	* @Description: 读取文件  
+	* @param @param fileName
+	* @param @return    参数  
+	* @return String    返回类型  
+	* @throws
+	 */
+	public static String  readFile(File fileName) {
+		//缓冲字符串
+		StringBuffer sb = new StringBuffer();
+		//缓冲输入流
+		BufferedReader br=null;
+		try {
+			//字符输入流转缓冲输入流
+			br=new BufferedReader(new FileReader(fileName));
+			do {
+				//读取一行
+				String readLine = br.readLine();
+				//追加至缓冲字符串
+				sb.append(readLine);
+				//读取一行进行换行
+				sb.append("\n");
+			} while (br.read()!=-1);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			StreamUtil.close(br);
+		}
+		return sb.toString();
+		
+	}
+	
+	/**
+	* @Title: readFileToList  
+	* @Description: 读取文件至list集合
+	* @param @param fileName
+	* @param @return    参数  
+	* @return List<String>    返回类型  
+	* @throws
+	 */
+	public static List<String>  readFileToList(File fileName) {
+		List<String> list = new ArrayList<String>();
+		//缓冲输入流
+		BufferedReader br=null;
+		try {
+			//字符输入流转缓冲输入流
+			br=new BufferedReader(new FileReader(fileName));
+			do {
+				//读取一行
+				String readLine = br.readLine();
+				//追加至缓冲字符串
+				list.add(readLine);
+				//读取一行进行换行
+			} while (br.read()!=-1);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			StreamUtil.close(br);
+		}
+		return list;
+		
+	}
+	
 }

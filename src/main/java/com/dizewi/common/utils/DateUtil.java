@@ -114,7 +114,7 @@ public class DateUtil {
 	
 	
 	public static boolean inMonth(Date thiDate) {
-		
+		Calendar instance = Calendar.getInstance();
 		return false;
 	}
 	
@@ -131,9 +131,5 @@ public class DateUtil {
 	}
 	
 	
-	public static void main(String[] args){
-		System.out.println(inWeek("2020-1-9"));
-		
-	}
 	
 }
