@@ -56,6 +56,13 @@ public class StringUtil {
 		return str.matches(regex);
 	}
 	
+	public static boolean isNumber(String str) {
+		String regex="\\d+";
+		return str.matches(regex);
+	}
+	
+	
+	
 	/**
 	* @Title: isEmail  
 	* @Description: 判断字符串为邮箱
