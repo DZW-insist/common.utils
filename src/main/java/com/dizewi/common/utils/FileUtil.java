@@ -60,9 +60,7 @@ public class FileUtil {
 	}
 	
 	
-	public static void deleFile(String fileName) {
-		deleteFile(new File(fileName));
-	}
+	
 	/**
 	* @Title: deleteFile  
 	* @Description: 删除文件
@@ -85,7 +83,9 @@ public class FileUtil {
 			}
 		}
 	}
-	
+	public static void deleFile(String fileName) {
+		deleteFile(new File(fileName));
+	}
 	/**
 	* @Title: readFile  
 	* @Description: 读取文件  
@@ -118,6 +118,9 @@ public class FileUtil {
 		return sb.toString();
 		
 	}
+	public static String  readFile(String fileName) {
+		return readFile(new File(fileName));
+	}
 	
 	/**
 	* @Title: readFileToList  
@@ -149,5 +152,7 @@ public class FileUtil {
 		return list;
 		
 	}
-	
+	public static List<String>  readFileToList(String fileName){
+		return readFileToList(new File(fileName));
+	}
 }
