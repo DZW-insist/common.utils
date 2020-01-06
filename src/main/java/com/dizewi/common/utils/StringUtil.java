@@ -76,6 +76,11 @@ public class StringUtil {
 		return str.matches(regex);
 	}
 	
+	public static boolean isDate(String str) {
+		String regex="\\d{4}-\\d{2}-\\d{2}";	
+		return str.matches(regex);
+	}
+	
 	/**
 	 * 
 	* @Title: isLetter  
