@@ -57,7 +57,7 @@ public class StringUtil {
 	}
 	
 	public static boolean isNumber(String str) {
-		String regex="\\d+";
+		String regex="[0-9]+";
 		return str.matches(regex);
 	}
 	

@@ -137,13 +137,12 @@ public class FileUtil {
 		try {
 			//字符输入流转缓冲输入流
 			br=new BufferedReader(new FileReader(fileName));
-			do {
-				//读取一行
-				String readLine = br.readLine();
+			String str=null;
+			while ((str=br.readLine())!=null){
 				//追加至缓冲字符串
-				list.add(readLine);
+				list.add(str);
 				//读取一行进行换行
-			} while (br.read()!=-1);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally {
