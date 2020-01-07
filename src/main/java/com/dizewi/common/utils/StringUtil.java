@@ -1,6 +1,5 @@
 package com.dizewi.common.utils;
 
-import java.util.Random;
 
 /**
  * @author 作者:dizewei
@@ -56,6 +55,14 @@ public class StringUtil {
 		return str.matches(regex);
 	}
 	
+	/**
+	* @Title: isNumber  
+	* @Description:判断是否是数字
+	* @param @param str
+	* @param @return    参数  
+	* @return boolean    返回类型  
+	* @throws
+	 */
 	public static boolean isNumber(String str) {
 		String regex="[0-9]+";
 		return str.matches(regex);
@@ -76,6 +83,14 @@ public class StringUtil {
 		return str.matches(regex);
 	}
 	
+	/**
+	* @Title: isDate  
+	* @Description: 判断是否是时间格式 
+	* @param @param str
+	* @param @return    参数  
+	* @return boolean    返回类型  
+	* @throws
+	 */
 	public static boolean isDate(String str) {
 		String regex="\\d{4}-\\d{2}-\\d{2}";	
 		return str.matches(regex);
@@ -101,86 +116,5 @@ public class StringUtil {
 		return str.matches(regex);
 	}
 	
-	/**
-	* @Title: getRandomChar  
-	* @Description: 获取随机的英文字母
-	* @param @return    参数  
-	* @return char    返回类型  
-	* @throws
-	 */
-	public static char getRandomLetterChar() {
-		Random random = new Random();
-		char c=(char) ('a'+random.nextInt(26));
-		return c;
-	}
 	
-	/**
-	* @Title: getRandomString  
-	* @Description: 获取随机的指定长度的英文字符串
-	* @param @param i
-	* @param @return    参数  
-	* @return String    返回类型  
-	* @throws
-	 */
-	public static String getRandomLetterString(int num) {
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < num; i++) {
-			sb.append(getRandomLetterChar());
-		}
-		return sb.toString();
-	}
-	
-	/**
-	* @Title: getRandomNumber  
-	* @Description: 获取随机数字
-	* @param @return    参数  
-	* @return String    返回类型  
-	* @throws
-	 */
-	public static char getRandomNumber() {
-		Random random = new Random();
-		char c=(char) ('0'+random.nextInt(10));
-		return c;
-	}
-	
-	/**
-	* @Title: getRandomNumberString  
-	* @Description:获取随机的指定长度的数字字符串
-	* @param @param num
-	* @param @return    参数  
-	* @return String    返回类型  
-	* @throws
-	 */
-	public static String getRandomNumberString(int num) {
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i <num; i++) {
-			sb.append(getRandomNumber());
-		}
-		return sb.toString();
-	}
-	
-	
-	/**
-	* @Title: getRandomNumAndChar  
-	* @Description: 获取随机的指定长度的数字字母字符串
-	* @param @param Num
-	* @param @return    参数  
-	* @return String    返回类型  
-	* @throws
-	 */
-	public static String getRandomNumAndChar(int num) {
-		StringBuffer sb = new StringBuffer();
-		Random random = new Random();
-		for (int i = 0; i < num; i++) {
-			int j=random.nextInt(36);
-			//随机数字大于10生成字母
-			if (j>10) {
-			sb.append(getRandomLetterChar());
-			}else{
-				sb.append(getRandomNumber());
-			}
-		}
-		return sb.toString();
-	}
-
 }
