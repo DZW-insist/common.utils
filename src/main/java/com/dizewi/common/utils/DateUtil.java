@@ -15,6 +15,49 @@ public class DateUtil {
 	public static SimpleDateFormat sdfDateTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	/**
+	* @Title: 获取当前时间的一天前的时间
+	* @Description: TODO(这里用一句话描述这个方法的作用)  
+	* @param @param date
+	* @param @return    参数  
+	* @return Date    返回类型  
+	* @throws
+	 */
+	public static Date subDate(Date date) {
+		//用当前系统时间去实例化一个日历类
+		Calendar c = Calendar.getInstance();
+		//用传入的日期示例化日历类
+		c.setTime(date); 
+
+		//借助日历类，减去1天
+		c.add(Calendar.DATE, -1);
+
+		return c.getTime();
+
+	}
+	/**
+	* @Title: randomDate  
+	* @Description: 产生开始时间和结束时间范围的随机时间
+	* @param @param start
+	* @param @param end
+	* @param @return    参数  
+	* @return Date    返回类型  
+	* @throws
+	 */
+	
+	public static Date randomDate(Date start,Date end) {
+		//获取开始时间的毫秒数
+		long t1 = start.getTime();
+		//获取结束时间的毫秒数
+		long t2 = end.getTime();
+		long t=(long) ((Math.random()*(t2-t1)+1)+t1);
+		return new Date(t);
+		
+	}
+	
+	
+	
+	
+	/**
 	* @Title: getAge  
 	* @Description:  根据指定时间计算年龄
 	* @param @param thisDate
@@ -194,10 +237,7 @@ public class DateUtil {
 		return false;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(inWeek("2020-01-12"));
-		
-	}
+	
 	
 	
 }
