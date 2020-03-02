@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.xml.crypto.Data;
+
 public class DateUtil {
 	public static SimpleDateFormat sdfDate=new SimpleDateFormat("yyyy-MM-dd");
 	public static SimpleDateFormat sdfDateTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -237,7 +239,22 @@ public class DateUtil {
 		return false;
 	}
 	
+	public static void main(String[] args) {
+		Date date1;
+		Date date2;
+		try {
+			 date1= sdfDate.parse("1949-01-01");
+			 date2= sdfDate.parse("2001-12-31");
+			 Date randomDate = randomDate(date1,date2);
+			 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			 String format = simpleDateFormat.format(randomDate);
+			 System.out.println(format);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
+	}
 	
 	
 }

@@ -23,6 +23,7 @@ public class RandomUtil {
 		Random random = new Random();
 		return min+random.nextInt(max-min+1);
 	}
+	
 	/**
 	* @Title: random  
 	* @Description: 获取可重复的最小值与最大值之间的指定数量的随机数
@@ -150,5 +151,12 @@ public class RandomUtil {
 		}
 		return sb.toString();
 	}
-
+	
+	public static void main(String[] args) {
+		int randomNumber = randomNumber(3,20);
+		String randomLetterString = getRandomLetterString(randomNumber);
+		
+		
+		System.out.println(randomLetterString);
+	}
 }
