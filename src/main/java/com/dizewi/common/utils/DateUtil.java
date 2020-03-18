@@ -10,11 +10,42 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.xml.crypto.Data;
-
 public class DateUtil {
-	public static SimpleDateFormat sdfDate=new SimpleDateFormat("yyyy-MM-dd");
-	public static SimpleDateFormat sdfDateTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	public static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+	/**
+	 * @Title: format   
+	 * @Description: 格式化日期   
+	 * @param: @param theDate
+	 * @param: @param format
+	 * @param: @return
+	 * @param: @throws ParseException      
+	 * @return: String      
+	 * @throws
+	 */
+	public static String format(Date theDate,String format) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+		return simpleDateFormat.format(theDate);
+	}
+	/**
+	 * @Title: parse   
+	 * @Description: 解析日期   
+	 * @param: @param theDateStr
+	 * @param: @param format
+	 * @param: @return      
+	 * @return: Date      
+	 * @throws
+	 */
+	public static Date parse(String theDateStr,String format) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+		try {
+			return simpleDateFormat.parse(theDateStr);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	/**
 	* @Title: 获取当前时间的一天前的时间
@@ -99,7 +130,7 @@ public class DateUtil {
 	public static int getAge(String thisDate) {
 		Date parse;
 		try {
-			parse = sdfDate.parse(thisDate);
+			parse = dateFormat.parse(thisDate);
 			return getAge(parse);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -132,8 +163,8 @@ public class DateUtil {
 		Date parse1;
 		Date parse2; 
 		try {
-			parse1 = sdfDate.parse(date1);
-			parse2 = sdfDate.parse(date2);
+			parse1 = dateFormat.parse(date1);
+			parse2 = dateFormat.parse(date2);
 			return getDayNum(parse1,parse2);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -156,7 +187,7 @@ public class DateUtil {
 	 */
 	public static int getDayNum(String date1) {
 			Date date = new Date();
-			String date2 = sdfDate.format(date);
+			String date2 = dateFormat.format(date);
 			return getDayNum(date1, date2);
 			
 	}
@@ -171,7 +202,7 @@ public class DateUtil {
 	 */
 	public static boolean isToday(String thisDate) {
 		Date date = new Date();
-		String dateStr = sdfDate.format(date);
+		String dateStr = dateFormat.format(date);
 		//今天与指定日期进行比较
 		return dateStr.equals(thisDate);
 	}
@@ -201,7 +232,7 @@ public class DateUtil {
 	}
 	public static boolean inWeek(String date) {
 		try {
-			return inWeek(sdfDate.parse(date));
+			return inWeek(dateFormat.parse(date));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -230,7 +261,7 @@ public class DateUtil {
 	public static boolean inMonth(String thisDate) {
 		Date parse;
 		try {
-			parse = sdfDate.parse(thisDate);
+			parse = dateFormat.parse(thisDate);
 			return inMonth(parse);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -243,8 +274,8 @@ public class DateUtil {
 		Date date1;
 		Date date2;
 		try {
-			 date1= sdfDate.parse("1949-01-01");
-			 date2= sdfDate.parse("2001-12-31");
+			 date1= dateFormat.parse("1949-01-01");
+			 date2= dateFormat.parse("2001-12-31");
 			 Date randomDate = randomDate(date1,date2);
 			 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			 String format = simpleDateFormat.format(randomDate);
